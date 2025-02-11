@@ -1,4 +1,7 @@
-{{if gt (len .) 0}}
+{{ $values := .Values }}
+
+
+{{if gt (len .Data) 0}}
 <h2>Task List</h2>
 <table>
    
@@ -8,20 +11,19 @@
         <th>Delete</th>
     </tr>
 
-    {{range .}} <!-- Iterate over the array -->
+    {{range .Data}} <!-- Iterate over the array -->
     <tr>
-        
         <td class="{{if .completed}}completed{{end}}">{{.title}}</td>
         <td>
             <input type="checkbox"
-                   hx-patch="{{.postgrest_url}}/tasks?id=eq.{{.id}}"
+                   hx-patch="{{$values.postgrest_url}}/tasks?id=eq.{{.id}}"
                    hx-trigger="change"
                    hx-headers='{"Prefer": "return=representation"}'
                    hx-vals='{"completed": "{{not .completed}}"}'
                    {{if .completed}} checked {{end}}>
             <label>{{if .completed}}✅ Done{{else}}❌ Pending{{end}}</label>
         </td>
-        <td><button href="#" hx-on:htmx:afterRequest="console.log('test')" hx-delete="{{.postgrest_url}}/tasks?id=eq.{{.id}}">delete</button></td>
+        <td><button href="#" hx-on:htmx:afterRequest="console.log('test')" hx-delete="{{$values.postgrest_url}}/tasks?id=eq.{{.id}}">delete</button></td>
     </tr>
     {{end}}
     
