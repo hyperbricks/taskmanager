@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <script src="https://unpkg.com/htmx.org@latest/dist/htmx.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@latest/dist/ext/json-enc.js"></script>
+    <link rel="stylesheet" href="static/styles.css">
+    <script src="static/main.js"></script>
+</head>
+
+<body>
+    <h1>HyperBricks Task Manager App</h1>
+    <div id="post-response"> </div>
+    <form id="task-form" hx-post="{{postgrest_url}}/tasks" hx-trigger="submit" hx-target="#post-response"
+        hx-ext="json-enc">
+
+        <input type="text" name="title" id="title" placeholder="Enter task title" required>
+        <button type="submit" hx-on::after-swap="console.log('test')">Add Task</button>
+    </form>
+    <div id="tasklist">
+        <div hx-get="tasks" hx-trigger="load" hx-target="#tasklist" hx-swap="innerHTML">
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+api_test = <API_RENDER>
+api_test {
+	endpoint = {{ENV:POSTGREST_URL}}/tasks?order=id.desc
+	method = GET
+	template = {{TEMPLATE:taskslist.html}}
+	values {
+        postgrest_url = {{ENV:POSTGREST_URL}}
+    }
+    istemplate = false
+	# debug = true
+	enclose = <div class="userlist">|</div>
+}
+
+tasks = <FRAGMENT>
+tasks.route = tasks
+tasks.10 < api_test

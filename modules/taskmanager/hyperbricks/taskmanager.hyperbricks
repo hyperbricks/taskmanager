@@ -1,0 +1,10 @@
+@import "lib/tasklist.hyperbricks"
+
+todo_app = <HYPERMEDIA>
+todo_app.route = index
+todo_app.template {
+    template = {{TEMPLATE:index.html}}
+    values {
+        postgrest_url = {{ENV:POSTGREST_URL}}
+    }
+}
