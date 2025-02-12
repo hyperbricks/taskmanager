@@ -24,7 +24,25 @@ set POSTGREST_URL
 export POSTGREST_URL="http://<your_host_here>:<your_port_here>"
 ```
 
+clone the repository
+```
+git clone https://github.com/hyperbricks/taskmanager.git
+```
+
 Start hyperbricks from root directory:
 ```
 hyperbricks start -m taskmanager
 ```
+
+
+Notes:
+
+- Make sure that $module in `package.hyperbricks` has to be the same as the actual directory.
+```
+$module = modules/taskmanager
+```
+
+- Keep this properties `package.hyperbricks` for auto reload when developing
+    - mode = development 
+    - development.watch = true
+    - development.reload = true
