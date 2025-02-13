@@ -6,7 +6,7 @@ api_test {
 	values {
         postgrest_url = {{ENV:POSTGREST_URL}}
     }
-    istemplate = false
+   
 	# debug = true
 	enclose = <div class="userlist">|</div>
 }
