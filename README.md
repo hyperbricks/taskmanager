@@ -1,7 +1,7 @@
+# Hyperbricks is under development and this example is already outdated.
+
+
 # Task manager (Poc) 
-
-** Hyperbricks is under development and this example is already outdated.
-
 [Hyperbricks](https://github.com/hyperbricks) Task Manager project with [PostgREST](https://postgrest.org/) and [HTMX](https://htmx.org/)
 
 - **Task Manager**: Create, update, and delete tasks.
