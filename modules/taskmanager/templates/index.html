@@ -5,17 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task List</title>
-    <script src="https://unpkg.com/htmx.org@latest/dist/htmx.min.js"></script>
-    <script src="https://unpkg.com/htmx.org@latest/dist/ext/json-enc.js"></script>
+    <!-- option B: allow cross-origin requests up-front -->
+
+
+    <script src="https://unpkg.com/htmx.org@2.0.5/dist/htmx.min.js"></script>
+    <script src="https://unpkg.com/htmx-ext-json-enc@latest/json-enc.js"></script>
+
+    <script>
+        htmx.config.selfRequestsOnly = false  // this is how you configure htmx safely
+    </script>
     <link rel="stylesheet" href="static/styles.css">
-    <script src="static/main.js"></script>
+    <script defer>
+        document.addEventListener('htmx:afterRequest', function (event) {
+            switch (event.detail.requestConfig.verb) {
+                case "post":
+                    htmx.ajax("GET", "/tasks?order=id.asc", "#tasklist");
+                    break;
+                case "delete":
+                    htmx.ajax("GET", "/tasks?order=id.asc", "#tasklist");
+                    break;
+                case "patch":
+                    htmx.ajax("GET", "/tasks?order=id.asc", "#tasklist");
+                    break;
+                default:
+                    document.getElementById("title").value = "";
+                    break;
+            }
+        });
+    </script>
 </head>
 
 <body>
     <h1>HyperBricks Task Manager App</h1>
     <div id="post-response"> </div>
-    <form id="task-form" hx-post="{{postgrest_url}}/tasks" hx-trigger="submit" hx-target="#post-response"
-        hx-ext="json-enc">
+    <form id="task-form" hx-ext="json-enc" hx-post="{{.postgrest_url}}/tasks" hx-trigger="submit"
+        hx-target="#post-response">
 
         <input type="text" name="title" id="title" placeholder="Enter task title" required>
         <button type="submit" hx-on::after-swap="console.log('test')">Add Task</button>

@@ -1,33 +1,37 @@
-{{ $values := .Values }}
-
-
+{{ $values := . }}
+<div>Docker PostgREST running at {{$values.postgrest_url}}</div>
 {{if gt (len .Data) 0}}
 <h2>Task List</h2>
 <table>
-   
     <tr>
         <th>Task</th>
         <th>Status</th>
         <th>Delete</th>
     </tr>
-
-    {{range .Data}} <!-- Iterate over the array -->
+        {{range .Data}}
     <tr>
         <td class="{{if .completed}}completed{{end}}">{{.title}}</td>
         <td>
-            <input type="checkbox"
-                   hx-patch="{{$values.postgrest_url}}/tasks?id=eq.{{.id}}"
-                   hx-trigger="change"
-                   hx-headers='{"Prefer": "return=representation"}'
-                   hx-vals='{"completed": "{{not .completed}}"}'
-                   {{if .completed}} checked {{end}}>
-            <label>{{if .completed}}✅ Done{{else}}❌ Pending{{end}}</label>
+            <input type="checkbox" 
+            class="status-checkbox"
+            hx-patch="{{$values.postgrest_url}}/tasks?id=eq.{{.id}}" 
+            hx-trigger="change"
+            hx-headers='{"Prefer": "return=representation"}'
+            hx-vals='{"completed": "{{not .completed}}"}'
+            {{if .completed}} checked {{end}}>
+
+            <span class="status-label {{if .completed}}done{{else}}pending{{end}}">
+            {{if .completed}}Done{{else}}Pending{{end}}
+            </span>
         </td>
-        <td><button href="#" hx-on:htmx:afterRequest="console.log('test')" hx-delete="{{$values.postgrest_url}}/tasks?id=eq.{{.id}}">delete</button></td>
+        <td><button 
+                href="#" 
+                hx-on:htmx:afterRequest="console.log('test')"
+                hx-delete="{{$values.postgrest_url}}/tasks?id=eq.{{.id}}">delete</button></td>
     </tr>
     {{end}}
-    
+
 </table>
 {{else}}
-	<p>Tasklist is empty</p> 
+    <p>Tasklist is empty</p>
 {{end}}

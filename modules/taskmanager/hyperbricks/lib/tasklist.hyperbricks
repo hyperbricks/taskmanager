@@ -5,8 +5,9 @@ api_test {
 	template = {{TEMPLATE:taskslist.html}}
 	values {
         postgrest_url = {{ENV:POSTGREST_URL}}
+		test = TEST123
     }
-   
+
 	# debug = true
 	enclose = <div class="userlist">|</div>
 }

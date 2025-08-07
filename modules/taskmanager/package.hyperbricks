@@ -22,7 +22,7 @@ hyperbricks {
         # watches hyperbricks and templatedir (directories) 
         watch = true
         reload = true
-        frontend_errors = true
+        frontend_errors = false
     }
 
     live {
