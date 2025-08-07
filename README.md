@@ -28,18 +28,18 @@ cd docker
 sudo docker compose up -d
 ```
 
-clone the repository
+> clone the repository
 ```
 git clone https://github.com/hyperbricks/taskmanager.git
 cd taskmanager
 ```
 
-set POSTGREST_URL (This demo uses http://localhost:3000)
+> set POSTGREST_URL (This demo uses http://localhost:3000)
 ```
 export POSTGREST_URL="http://<your_host_here>:<your_port_here>"
 ```
 
-Start hyperbricks from root directory:
+> Start hyperbricks from root directory (parent of modules/):
 ```
 hyperbricks start -m taskmanager
 ```
