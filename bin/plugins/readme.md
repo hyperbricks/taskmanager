@@ -1,0 +1,1 @@
+This folder needs to exist for HyperBricks to work properly.
