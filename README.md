@@ -22,22 +22,23 @@
 go install github.com/hyperbricks/hyperbricks/cmd/hyperbricks@latest
 ```
 
-- Docker from docker directory (recommended) or PostgreSQL installed
-```
-cd docker
-sudo docker compose up -d
-```
-
 > clone the repository
 ```
 git clone https://github.com/hyperbricks/taskmanager.git
 cd taskmanager
 ```
 
-> set POSTGREST_URL (This demo uses http://localhost:3000)
+- Docker from docker directory (recommended) or PostgreSQL installed
 ```
-export POSTGREST_URL="http://<your_host_here>:<your_port_here>"
+cd docker
+sudo docker compose up -d
 ```
+
+> set POSTGREST_URL (http://<your_host_here>:<your_port_here>) This demo uses http://localhost:3000.
+```
+export POSTGREST_URL="http://localhost:3000"
+```
+
 
 > Start hyperbricks from root directory (parent of modules/):
 ```
